@@ -22,6 +22,7 @@ class EncodeDecode:
             asciiVal = ord(char)
             asciiVal -= 3
             asciiList.append(asciiVal)
+            # Hallo
 
         decodedString = "".join([chr(a) for a in asciiList])
 
