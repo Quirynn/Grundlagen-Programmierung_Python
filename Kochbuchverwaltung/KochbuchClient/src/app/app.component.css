@@ -1,0 +1,18 @@
+#page-wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+
+#page-content {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    padding-top: 96px;
+    height: calc(100vh - 48px - 72px);
+    background-color: gray;
+    /* background-image: url('../assets/bg-image.jpg');
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat; */
+}

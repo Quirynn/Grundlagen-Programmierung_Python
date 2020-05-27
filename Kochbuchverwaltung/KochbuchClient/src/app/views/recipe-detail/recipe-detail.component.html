@@ -1,0 +1,75 @@
+<div id="recipe-detail" class="view-component-wrapper" *ngIf="recipeDetail$ | async as recipe">
+    <mat-toolbar color="accent">
+        <mat-toolbar-row>
+            <div>Rezeptdetails:&nbsp;{{ recipe.getData('title') }}</div>
+            <div class="action-buttons">
+                <button mat-mini-fab color="primary" matTooltip="Rezept Bearbeiten" (click)="onRecipeEdit(recipe)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-mini-fab color="warn" matTooltip="Rezept Löschen" (click)="onRecipeDelete(recipe.getData('recipeID'))">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-card class="recipe-detail-content">
+        <div class="recipe-content-wrapper">
+            <mat-card-subtitle>
+                Zubereitungszeit:&nbsp;{{ recipe.getData('prepareTimeMinutes') }}&nbsp;minuten
+            </mat-card-subtitle>
+            <mat-card-subtitle>
+                Kaloriensumme:&nbsp;{{ recipe.getCaloriesSum() }}
+            </mat-card-subtitle>
+        </div>
+
+        <div class="recipe-content-wrapper">
+            <mat-card-title>
+                Zutatenliste:
+            </mat-card-title>
+            <mat-card-content>
+                <mat-table [dataSource]="recipe.getData('ingredients')">
+
+                    <ng-container matColumnDef="title">
+                        <mat-header-cell *matHeaderCellDef>
+                            Titel
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let ingredient">
+                            {{ ingredient.getData('title') }}
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="amount">
+                        <mat-header-cell *matHeaderCellDef>
+                            Menge
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let ingredient">
+                            {{ ingredient.getData('amount') }}&nbsp;{{ ingredient.getData('amountUnit') }}
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="calories">
+                        <mat-header-cell *matHeaderCellDef>
+                            Kalorien
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let ingredient">
+                            {{ ingredient.getData('calories') }}
+                        </mat-cell>
+                    </ng-container>
+
+
+                    <mat-header-row *matHeaderRowDef="['title','amount', 'calories']"></mat-header-row>
+                    <mat-row matRipple *matRowDef="let row; columns: ['title','amount', 'calories'];"></mat-row>
+                </mat-table>
+            </mat-card-content>
+        </div>
+
+        <div class="recipe-content-wrapper">
+            <mat-card-title>
+                Zubereitung:
+            </mat-card-title>
+            <mat-card-content>
+                <div class="prepare-instructions" [innerHTML]="recipe.getData('prepareInstructions')"></div>
+            </mat-card-content>
+        </div>
+    </mat-card>
+</div>

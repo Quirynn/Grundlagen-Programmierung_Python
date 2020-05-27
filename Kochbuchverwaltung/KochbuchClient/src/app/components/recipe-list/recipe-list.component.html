@@ -1,0 +1,42 @@
+<div id="recipe-list" *ngIf="!!recipeList">
+    <mat-table [dataSource]="recipeList">
+        <ng-container matColumnDef="recipeID">
+            <mat-header-cell *matHeaderCellDef>
+                RezeptID
+            </mat-header-cell>
+            <mat-cell *matCellDef="let recipe">
+                {{ recipe.getData('recipeID') }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="title">
+            <mat-header-cell *matHeaderCellDef>
+                Titel
+            </mat-header-cell>
+            <mat-cell *matCellDef="let recipe">
+                {{ recipe.getData('title') }} 
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="prepareTimeMinutes">
+            <mat-header-cell *matHeaderCellDef>
+                Zubereitungszeit (m)
+            </mat-header-cell>
+            <mat-cell *matCellDef="let recipe">
+                {{ recipe.getData('prepareTimeMinutes') }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="caloriesSum">
+            <mat-header-cell *matHeaderCellDef>
+                Kalorien
+            </mat-header-cell>
+            <mat-cell *matCellDef="let recipe">
+                {{ recipe.getCaloriesSum() }}
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="['recipeID','title','prepareTimeMinutes', 'caloriesSum']"></mat-header-row>
+        <mat-row matRipple *matRowDef="let row; columns: ['recipeID','title','prepareTimeMinutes', 'caloriesSum'];" [routerLink]="['/recipe', row.recipeID, 'detail']"></mat-row>
+    </mat-table>
+</div>

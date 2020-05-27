@@ -1,0 +1,10 @@
+
+.actions {
+    display: flex;
+    flex-flow: column nowrap;
+    margin-top: 12px;
+}
+
+.actions > button:not(:first-child) {
+    margin-top: 8px;
+}

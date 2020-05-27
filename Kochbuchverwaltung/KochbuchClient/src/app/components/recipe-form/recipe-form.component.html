@@ -1,0 +1,64 @@
+<div id="recipeForm">
+    <h1 *ngIf="isEdit">Rezept bearbeiten</h1>
+    <h1 *ngIf="!isEdit">Neues Rezept erstellen</h1>
+
+    <mat-horizontal-stepper [linear]="true" #recipeStepper>
+        <mat-step [stepControl]="recipeForm">
+            <form [formGroup]="recipeForm">
+                <ng-template matStepLabel>Rezept</ng-template>
+                <mat-form-field appearance="outline">
+                    <mat-label>Titel</mat-label>
+                    <input matInput [formControl]="recipeForm.controls['title']" />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Zubereitungszeit in Minuten</mat-label>
+                    <input matInput [formControl]="recipeForm.controls['prepareTimeMinutes']" />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Anweisungen zur Zubereitung</mat-label>
+                    <textarea matInput [formControl]="recipeForm.controls['prepareInstructions']"></textarea>
+                </mat-form-field>
+                <div class="action">
+                    <button mat-raised-button color="primary" matStepperNext>Weiter</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Zutaten hinzufügen</ng-template>
+            <div class="ingredient-form-element" *ngFor="let ingredientForm of ingredientForms; let i = index;">
+                <form [formGroup]="ingredientForm">
+                    <div>
+                        <mat-form-field>
+                            <mat-label>Name der Zutat</mat-label>
+                            <input matInput [formControl]="ingredientForm.controls['title']" />
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="amount">
+                            <mat-label>Menge</mat-label>
+                            <input matInput type="number" [formControl]="ingredientForm.controls['amount']" />
+                        </mat-form-field>
+                        <mat-form-field class="amountUnit">
+                            <mat-label>Mengeneinheit</mat-label>
+                            <input matInput [formControl]="ingredientForm.controls['amountUnit']" />
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field>
+                            <mat-label>Anzahl Kalorien</mat-label>
+                            <input matInput type="number" [formControl]="ingredientForm.controls['calories']" />
+                        </mat-form-field>
+                    </div>
+                </form>
+            </div>
+            <div class="add-ingredient">
+                <button mat-raised-button (click)="onIngredientAdd()">Weitere Zutat hinzufügen</button>
+            </div>
+
+            <div class="action-p2">
+                <button mat-raised-button color="accent" matStepperPrevious>Zurück</button>
+                <button mat-raised-button color="primary" [mat-dialog-close]="onSubmitSave()">Speichern</button>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
+</div>

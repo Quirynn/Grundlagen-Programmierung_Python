@@ -1,0 +1,18 @@
+#navigation {
+    height: 72px;
+    background-color: red;
+}
+
+mat-toolbar-row {
+    height: 72px;
+}
+
+.home {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.home > span {
+    padding-left: 8px;
+}

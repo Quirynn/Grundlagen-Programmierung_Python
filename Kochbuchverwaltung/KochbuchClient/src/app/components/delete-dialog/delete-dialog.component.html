@@ -1,0 +1,12 @@
+<div id="deleteDialog">
+    <h1>
+        Rezept löschen
+    </h1>
+    <div>
+        Sind Sie sicher, dass sie das ausgewählte Rezept löschen möchten?
+    </div>
+    <div class="actions">
+        <button mat-flat-button color="warn" [mat-dialog-close]="true" cdkFocusInitial>Löschen</button>
+        <button mat-raised-button color="primary" (click)="onNoClick()">Abbrechen</button>
+    </div>
+</div>
